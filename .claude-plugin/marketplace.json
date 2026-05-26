@@ -9,6 +9,11 @@
       "name": "spend-monitor",
       "source": "./spend-monitor",
       "description": "AWS spend monitoring - consolidated org spend with MoM/YoY/trailing analysis, threshold alerting, and Slack notifications"
+    },
+    {
+      "name": "meeting-notes",
+      "source": "./meeting-notes",
+      "description": "Summarize meeting transcripts or notes into structured professional meeting notes with context, key points, and follow-ups"
     }
   ]
 }

@@ -1,0 +1,8 @@
+{
+  "name": "meeting-notes",
+  "description": "Summarize meeting transcripts or notes into structured professional meeting notes with context, key points, and follow-ups",
+  "version": "1.0.0",
+  "author": {
+    "name": "Nati Goldberg"
+  }
+}
