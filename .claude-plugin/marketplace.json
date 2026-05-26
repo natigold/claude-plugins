@@ -1,0 +1,14 @@
+{
+  "name": "nati-plugins",
+  "description": "Nati's custom Claude Code plugins",
+  "owner": {
+    "name": "Nati Goldberg"
+  },
+  "plugins": [
+    {
+      "name": "spend-monitor",
+      "source": "./spend-monitor",
+      "description": "AWS spend monitoring - consolidated org spend with MoM/YoY/trailing analysis, threshold alerting, and Slack notifications"
+    }
+  ]
+}

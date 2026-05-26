@@ -1,0 +1,9 @@
+{
+  "name": "spend-monitor",
+  "description": "AWS spend monitoring - consolidated org spend with MoM/YoY/trailing analysis, threshold alerting, and Slack notifications",
+  "version": "1.0.0",
+  "author": {
+    "name": "Nati Goldberg"
+  },
+  "mcpServers": "./.mcp.json"
+}

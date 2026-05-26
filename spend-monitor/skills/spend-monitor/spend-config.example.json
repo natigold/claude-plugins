@@ -1,0 +1,26 @@
+{
+  "exclude_credits_refunds": false,
+  "exclude_marketplace": false,
+  "thresholds": {
+    "mom_pct": 15,
+    "yoy_month_pct": 25,
+    "yoy_annual_pct": 25,
+    "trailing_pct": 25,
+    "service_pct": 30,
+    "min_service_spend_usd": 50,
+    "min_delta_usd": 1000,
+    "min_total_spend_usd": 100
+  },
+  "dimensions": {
+    "mom": true,
+    "yoy_month": true,
+    "yoy_annual": true,
+    "trailing": { "enabled": true, "months": 3 },
+    "anomalies": true,
+    "mtd_snapshot": true
+  },
+  "slack": {
+    "channel": "",
+    "notify_on": "breaches_only"
+  }
+}
