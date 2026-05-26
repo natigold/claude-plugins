@@ -21,46 +21,23 @@ AWS spend monitoring plugin for Claude Code. Analyzes consolidated org spend wit
 
 ### 1. Add the marketplace (one-time)
 
-```bash
-claude plugin marketplace add natigold/claude-plugins
+```
+/plugin marketplace add natigold/claude-plugins
 ```
 
 ### 2. Install the plugin
 
-```bash
-claude plugin install spend-monitor@nati-plugins
+```
+/plugin install spend-monitor@nati-plugins
 ```
 
-### 3. Configure AWS profile
+### 3. Configure
 
-Edit `.mcp.json` in the plugin directory and set your AWS profile:
-
-```json
-{
-  "mcpServers": {
-    "billing-mcp": {
-      "command": "uvx",
-      "args": ["awslabs.billing-cost-management-mcp-server@latest"],
-      "env": {
-        "FASTMCP_LOG_LEVEL": "ERROR",
-        "AWS_PROFILE": "your-aws-profile",
-        "AWS_REGION": "us-east-1"
-      }
-    }
-  }
-}
-```
+The plugin prompts for AWS profile, region, and Slack channel at install time.
 
 ### 4. Configure thresholds and Slack
 
-The plugin ships with `skills/spend-monitor/spend-config.example.json` as a template. Copy it to create your config:
-
-```bash
-cd skills/spend-monitor
-cp spend-config.example.json spend-config.json
-```
-
-Then edit `spend-config.json` to set your thresholds, Slack channel, and preferences. See the Configuration section below for all options.
+On first run, the plugin automatically creates a config file at `~/.claude/plugins/data/spend-monitor-nati-plugins/spend-config.json` from the bundled template. Edit that file to set your thresholds, Slack channel, and preferences. This file persists across plugin updates.
 
 ## Usage
 
@@ -93,8 +70,9 @@ From within Claude Code:
 | `thresholds.min_service_spend_usd` | Minimum spend to flag a service ($) | `50` |
 | `thresholds.min_delta_usd` | Minimum dollar change to flag ($) | `1000` |
 | `dimensions.trailing.months` | Trailing comparison window | `3` |
-| `slack.channel` | Slack channel/DM ID for alerts | `""` |
 | `slack.notify_on` | When to notify: `breaches_only`, `always`, `never` | `"breaches_only"` |
+
+The Slack channel is configured via plugin settings (prompted at install time), not in this file.
 
 ## Architecture
 

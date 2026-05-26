@@ -27,7 +27,7 @@ Analyze consolidated AWS spend from your payer account. Detects MoM, YoY, and tr
 
 When this skill is invoked:
 
-1. **Read config**: Read `spend-config.json` from this skill's directory.
+1. **Read config**: Read `spend-config.json` from `~/.claude/plugins/data/spend-monitor-nati-plugins/`. If the file doesn't exist, copy `spend-config.example.json` from this skill's directory to that location first, then read it.
 
 2. **Parse arguments**:
    - **Mode**: If `--daily` is present, run in daily mode. Otherwise, run in monthly mode (default).
@@ -169,7 +169,7 @@ When this skill is invoked:
 5. **Present the agent's report directly**: The agent returns the full analysis. Present it to the user as-is.
 
 6. **Slack notification** (if `--slack` was passed):
-   Read `slack` config. Check `notify_on`:
+   Use Slack channel from `${user_config.slack_channel}`. Read `notify_on` from `spend-config.json`:
    - `"breaches_only"`: Only send if there's at least one flag (default)
    - `"always"`: Send on every run
    - `"never"`: Skip Slack
@@ -202,12 +202,12 @@ When this skill is invoked:
    - Use Slack mrkdwn formatting: `*bold*`, `_italic_`, `:warning:` emoji.
 
    **Sending via Slack MCP:**
-   Use `mcp__slack-mcp__post_message` with the channel from config:
+   Use `mcp__slack-mcp__post_message` with the channel `${user_config.slack_channel}`:
    ```
-   channel: "{slack.channel}"
+   channel: "${user_config.slack_channel}"
    text: "{message}"
    ```
-   If `slack.channel` is empty, note "Slack channel not configured — set `slack.channel` in spend-config.json" and skip.
+   If the channel is empty, note "Slack channel not configured — reconfigure the plugin to set it" and skip.
    The channel can be a DM channel ID (e.g., `D030G78377G`) or a regular channel (e.g., `#spend-alerts`).
 
 ## Scheduling

@@ -20,7 +20,6 @@
     "mtd_snapshot": true
   },
   "slack": {
-    "channel": "",
     "notify_on": "breaches_only"
   }
 }

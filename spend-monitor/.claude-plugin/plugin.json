@@ -5,5 +5,25 @@
   "author": {
     "name": "Nati Goldberg"
   },
-  "mcpServers": "./.mcp.json"
+  "mcpServers": "./.mcp.json",
+  "userConfig": {
+    "aws_profile": {
+      "type": "string",
+      "title": "AWS Profile",
+      "description": "AWS profile name with Cost Explorer access",
+      "default": "default"
+    },
+    "aws_region": {
+      "type": "string",
+      "title": "AWS Region",
+      "description": "AWS region for billing API calls",
+      "default": "us-east-1"
+    },
+    "slack_channel": {
+      "type": "string",
+      "title": "Slack Channel",
+      "description": "Slack channel or DM ID for spend alerts (e.g., #spend-alerts or D030G78377G). Leave empty to disable.",
+      "default": ""
+    }
+  }
 }
