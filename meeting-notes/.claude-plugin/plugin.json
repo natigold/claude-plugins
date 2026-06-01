@@ -4,5 +4,43 @@
   "version": "1.0.0",
   "author": {
     "name": "Nati Goldberg"
+  },
+  "userConfig": {
+    "input_bucket": {
+      "type": "string",
+      "title": "S3 Input Bucket",
+      "description": "Existing S3 bucket for uploading recordings to transcribe (required for audio/video; leave blank for text-only use)",
+      "default": ""
+    },
+    "input_prefix": {
+      "type": "string",
+      "title": "S3 Input Prefix",
+      "description": "Key prefix for uploaded recordings",
+      "default": "audio/recordings/"
+    },
+    "output_bucket": {
+      "type": "string",
+      "title": "S3 Output Bucket",
+      "description": "S3 bucket for transcript output (blank = reuse input bucket)",
+      "default": ""
+    },
+    "output_prefix": {
+      "type": "string",
+      "title": "S3 Output Prefix",
+      "description": "Key prefix for transcript output",
+      "default": "audio/transcriptions/"
+    },
+    "region": {
+      "type": "string",
+      "title": "AWS Region",
+      "description": "AWS region for Amazon Transcribe",
+      "default": "us-east-1"
+    },
+    "profile": {
+      "type": "string",
+      "title": "AWS Profile",
+      "description": "AWS profile name (blank = use current credentials)",
+      "default": ""
+    }
   }
 }
