@@ -56,6 +56,17 @@ Examples:
 * If the input contains abusive or objectionable language, respond only with: "Please use professional language"
 * Distinguish between decisions made vs. items still under discussion
 
+### Attribution and naming
+
+* Default to impersonal phrasing for routine discussion - "the team discussed", "it was agreed", "the agent investigates". Do not narrate who said each sentence
+* Use names only where attribution carries weight:
+  - Action-item owners (always - see Follow-up Task Format)
+  - The person who raised a concern, asked a key question, or gave a presentation/report
+  - The owner of a decision
+* Represent the note-author's own organization, not the author by name. The notes are written from the author's side, so the author's own statements are attributed to their organization (e.g. "AWS noted", "AWS recommended"), never to the author in the third person. Writing your own name as a third-person actor ("Nati shared...") reads as self-referential and is not professional practice
+* Keep the other party's names where the question/request/decision matters - this is legitimate attribution and useful in an account record
+* Initials are an acceptable shorthand for a named contributor in a multi-person exchange
+
 ### Additional rules for Transcript mode
 * Synthesize speaker segments into coherent notes (don't list speaker-by-speaker)
 * Group related discussion points under logical topic headings
