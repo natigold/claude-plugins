@@ -27,27 +27,53 @@ Never use markdown tables. Use bullet lists or numbered lists instead.
 
 Never use em dashes. Use a simple hyphen ( - ) instead.
 
-Structure your response with these sections (use bold for section names):
+Do not emit markdown decorators - no `#` headings and no `**bold**`. Emit plain text for the header block, section names, and subsection labels; the harness applies markdown styling afterward. Numbered lists (`1.`) and `-` bullets are list structure, not decoration, and are allowed where specified below.
 
-1. **Context** - pre-meeting background only: why the meeting was called, participants, date/time if mentioned, and prior history the attendees brought in. Do NOT put goals, objectives, decisions, or anything discussed during the meeting here - those belong in Notes
-2. **Notes** - what was discussed and decided in the meeting
-3. **Follow-ups** - Action items with owners if identified
+Begin with a header block, then the three sections. Put each label on its own line in plain text:
 
-Within all three sections, present items as a numbered list, not bullets.
-If one of these three top-level sections has no relevant content, leave it empty but include the header.
+```
+Title: <meeting title>
+Date: <date if known>
+Attendees:
+- <name>
+- <name>
+
+Context
+1. ...
+
+Notes
+...
+
+Follow-ups
+1. ...
+```
+
+Header block rules:
+- `Title:` - the meeting title (from supplied notes if given, otherwise inferred from the subject)
+- `Date:` - include only if known; omit the line otherwise
+- `Attendees:` - a bulleted list (one `-` per attendee). This is the only place bullets are used for top-level structure
+
+The three sections:
+
+1. Context - pre-meeting background only: why the meeting was called, and the situation as it stood BEFORE the meeting. Do NOT put goals, objectives, decisions, or anything discussed, explained, or walked through during the meeting here - even if it describes pre-existing state (e.g. an architecture someone explains during the meeting), it belongs in Notes, not Context
+2. Notes - what was discussed and decided in the meeting
+3. Follow-ups - action items with owners if identified
+
+Within all three sections, present items as a numbered list, not bullets (the attendee block above is the only bulleted list).
+If one of these three sections has no relevant content, leave it empty but include the section name.
 Don't add periods at the end of paragraphs.
 
-Output only these three sections and their content. Never append anything else - no source/transcript file path, no input filename, no processing notes, no commentary about how the notes were produced. The input path you were given is internal and must never appear in the output.
+Output only the header block and these three sections. Never append anything else - no source/transcript file path, no input filename, no processing notes, no commentary about how the notes were produced. The input path you were given is internal and must never appear in the output.
 
 ### Organizing the Notes section
 
 Choose the Notes structure based on the meeting type, which you infer from the content:
 
-- **Decision / working / solution sessions** (the discussion works toward a choice): organize as labeled subsections following the logical arc - **Problem / Requirement**, **Options Discussed**, **Recommendation**, **Decision**, **Open Items**. Include only the subsections that have real content
-- **Sync / status / multi-topic meetings**: one heading per topic, with that topic's points, decisions, and follow-ups beneath it. No forced arc
-- **Informal / non-technical / 1:1 / brainstorm meetings**: topic-grouped headings, or a simple grouped list for short meetings. Don't add decision scaffolding the meeting didn't have
+- Decision / working / solution sessions (the discussion works toward a choice): organize as labeled subsections following the logical arc, using these exact subsection labels in this order - Problem / Requirement, Options Discussed, Recommendation, Decision, Open Items. Apply this arc ONCE per meeting even when several problems or solution tracks are discussed: group all of them under each shared subsection (e.g. every track's options go under one Options Discussed) rather than repeating the arc per track. Include only the subsections that have real content
+- Sync / status / multi-topic meetings: one label per topic, with that topic's points, decisions, and follow-ups beneath it. No forced arc
+- Informal / non-technical / 1:1 / brainstorm meetings: topic-grouped labels, or a simple grouped list for short meetings. Don't add decision scaffolding the meeting didn't have
 
-When unsure, prefer the lighter structure. Unlike the three top-level sections above, these Notes subsections/headings are include-only-if-filled: a heading must describe content that exists - never invent a heading (such as "Decision" or "Recommendation") to fill a template. Number items continuously across subsections.
+When unsure, prefer the lighter structure. Unlike the three top-level sections above, these Notes subsection labels are include-only-if-filled: a label must describe content that exists - never invent a label (such as "Decision" or "Recommendation") to fill a template. Subsection labels are plain text on their own line (no markdown decorators). Number items continuously across subsections.
 
 ### Boundary: notes contain only the meeting
 
@@ -58,7 +84,8 @@ Notes contain only what was actually said or decided in the meeting. Never add p
 Format all follow-up items as: `@Owner - [Verb-first task]`
 
 Rules:
-- Always use @ mention for the owner (e.g., @Alice, @Bob, @TeamName)
+- Always use @ mention for the owner (e.g., @Alice, @Bob)
+- Name the individual who owns the action wherever the input identifies one - including when the owner is the author. Follow-up owners are named individuals, not organizations; this is a deliberate exception to the org-not-author rule for prose attribution. Only fall back to a team or organization name when no individual owner is identifiable
 - Start tasks with action verbs: Send, Check, Schedule, Configure, Review, Share, Arrange, Discuss, etc.
 - Be specific and actionable
 - No noun phrases like "OAuth support discussion" - use "Discuss OAuth support options"
@@ -83,7 +110,8 @@ Examples:
   - Action-item owners (always - see Follow-up Task Format)
   - The person who raised a concern, asked a key question, or gave a presentation/report
   - The owner of a decision
-* Represent the note-author's own organization, not the author by name. The notes are written from the author's side, so the author's own statements are attributed to their organization (e.g. if the author's company is AnyCompany, "AnyCompany noted", "AnyCompany recommended"), never to the author in the third person. Writing your own name as a third-person actor (e.g. "Alex shared...") reads as self-referential and is not professional practice
+* In the Notes and Context prose, represent the note-author's own organization, not the author by name. The notes are written from the author's side, so the author's own statements are attributed to their organization (e.g. if the author's company is AnyCompany, "AnyCompany noted", "AnyCompany recommended"), never to the author in the third person. Writing your own name as a third-person actor (e.g. "Alex shared...") reads as self-referential and is not professional practice. (Follow-up owners are the exception - see Follow-up Task Format)
+* Attribute an action to whoever actually performed it, and do not conflate who did something with who merely confirmed or agreed to it. If one party demonstrated, ran, or configured something and another party verbally confirmed a fact, attribute each correctly (e.g. "AnyCompany ran a query to demonstrate X; the customer confirmed they already had that data"). When the actor is the author's side, attribute the action to the organization, never to the author by name
 * Keep the other party's names where the question/request/decision matters - this is legitimate attribution and useful in an account record
 * Initials are an acceptable shorthand for a named contributor in a multi-person exchange
 
