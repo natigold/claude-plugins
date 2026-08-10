@@ -67,4 +67,4 @@ When reading any value above, treat both an empty string and a literal unsubstit
    - **Pasted text or notes**: pass the content directly in the prompt.
    - **Transcript from the pre-step**: give the agent the `TRANSCRIPT_PATH` and instruct it to read that file itself with the Read tool. Do not read or inline the contents yourself - transcripts can be large, and the agent handles parsing the `audio_segments` array.
 
-2. **Return results**: Display the agent's output exactly as returned. Do not reformat, restructure, add tables, or insert extra sections - the agent already follows its own formatting rules.
+2. **Return results**: Output the agent's text verbatim. The agent already follows its own formatting rules. Do not reformat, restructure, add tables, or insert extra sections, and do not add a preamble, trailing commentary, verification caveats, transcript or file paths, or an offer of next steps. If you have a caveat worth raising, re-run the agent rather than appending it.
