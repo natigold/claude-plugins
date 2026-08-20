@@ -67,4 +67,20 @@ When reading any value above, treat both an empty string and a literal unsubstit
    - **Pasted text or notes**: pass the content directly in the prompt.
    - **Transcript from the pre-step**: give the agent the `TRANSCRIPT_PATH` and instruct it to read that file itself with the Read tool. Do not read or inline the contents yourself - transcripts can be large, and the agent handles parsing the `audio_segments` array.
 
-2. **Return results**: Output the agent's text verbatim. The agent already follows its own formatting rules. Do not reformat, restructure, add tables, or insert extra sections, and do not add a preamble, trailing commentary, verification caveats, transcript or file paths, or an offer of next steps. If you have a caveat worth raising, re-run the agent rather than appending it.
+   Note the agent's name or ID from the spawn result - the review pass needs it.
+
+2. **Review the draft for tightness**: the first draft is not the deliverable. Check it against the "Tightness budgets" section of the agent definition (`agents/meeting-notes.md`), which holds the authoritative numbers, trim rules, and cut tests. Do not restate those rules here - read them from the agent file.
+
+   Produce a list of SPECIFIC violations. Generic instructions like "make it tighter" do not work; the critique must name its targets. For each violation give the exact location and the exact fix:
+   - subsections to delete, by number and label
+   - items to merge, by number
+   - items over the word cap, by number, with their measured word count
+   - the measured MoM body word count against budget
+
+   If the draft is within every budget, skip to step 4.
+
+3. **Request the revision**: send the violation list to the same agent with SendMessage, addressed by the name or ID from step 1. The agent still holds the draft in its context - do not resend the transcript or notes, and do not ask the agent to re-read the transcript file.
+
+   Run at most one review pass. If the revision still has violations, output it as-is - do not loop.
+
+4. **Return results**: Output the final text verbatim. The agent already follows its own formatting rules. Do not reformat, restructure, add tables, or insert extra sections, and do not add a preamble, trailing commentary, verification caveats, transcript or file paths, or an offer of next steps. Never show the user the first draft or your violation list - only the final version. If you have a caveat worth raising, the review pass is where it belongs, not appended to the output.
